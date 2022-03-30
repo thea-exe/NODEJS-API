@@ -1,0 +1,4 @@
+$ npm init -y  --> to initialize our project 
+$ npm install express --> to install express.js library which will be used to run our api
+$ npm install -g nodemon --> a package that will monitor project for changes and reload
+$ npm run dev --> to get the api running 
