@@ -14,7 +14,29 @@ let ideas = [{
     "idea": "a blog post on something related to ethereum"
 }]
 
-router.get('/', async(req, res) => {
-    res.json(ideas);
+router.get('/:id?', async(req, res) => { //tells express to look for a uri param in the path thats following ideas, which
+    //has a variable name of id. the ? means its optional, so this will address the request whether or not that uri param actually exists
+    let responseData;
+
+    // checks if uri para exists
+    if(req.params.id){
+        responseData = ideas.find(idea => idea.id === Number(req.params.id))
+    } else{
+        if(req.query.id){ // check to see if a query param has come in 
+            responseData = ideas.filter(idea => idea.id === Number(req.query.id)); // all query params come in as strings
+            // and because we are comparing idea.id, we need to convert the query param into a number
+        }
+    }
+
+    // we want to check if theres no response data, which means query param is not passed in 
+    // set responseData to the ideas object so it returns everything 
+    if (responseData === undefined){
+        responseData = ideas
+    }
+    res.json(responseData);
+})
+
+router.post('/', async(req, res) => {
+    
 })
 module.exports = router; // tells NodeJS that other files can use this code
