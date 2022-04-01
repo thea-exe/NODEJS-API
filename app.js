@@ -1,9 +1,10 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser'); // added middleware
 const ideasroutes = require('./routes/ideas');
 
 
-
+app.use(bodyParser.json()); // added middleware into express
 
 //method handler
 app.get('/', async(req,res) =>{

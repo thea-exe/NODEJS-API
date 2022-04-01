@@ -14,6 +14,7 @@ let ideas = [{
     "idea": "a blog post on something related to ethereum"
 }]
 
+// vvvvvvvvv this is where we start querying data
 router.get('/:id?', async(req, res) => { //tells express to look for a uri param in the path thats following ideas, which
     //has a variable name of id. the ? means its optional, so this will address the request whether or not that uri param actually exists
     let responseData;
@@ -36,7 +37,10 @@ router.get('/:id?', async(req, res) => { //tells express to look for a uri param
     res.json(responseData);
 })
 
+
+//vvvv this is for a post request, body-parser needed to use this piece of code
 router.post('/', async(req, res) => {
-    
+    ideas.push(req.body);
+    res.status(201).send(); // 201 maps to HTTP response status code of created
 })
 module.exports = router; // tells NodeJS that other files can use this code
